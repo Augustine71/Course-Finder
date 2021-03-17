@@ -104,7 +104,7 @@
   padding: 1px;
   
   color:black;
-  border-radius: 5px;
+  border-radius: 2px;
   border:1px solid lightgrey;
   font-weight: bold;
   font-size: large;
@@ -117,7 +117,7 @@
   padding: 1px;
   margin-right: 4px;
   color:black;
-  border-radius: 5px;
+  border-radius: 2px;
   border:1px solid lightgrey;
   font-weight: bold;
   font-size: large;
@@ -131,7 +131,7 @@
   height: 25px;
   padding: 1px;
   color:black;
-  border-radius: 5px;
+  border-radius: 2px;
   
   border-color: white;
   font-size: large;
@@ -148,14 +148,38 @@
   margin-left:20px;
   margin-top: 15px;
 }
+
+.tabdiv{
+  width:80vw;
+  margin: 10px auto;
+  overflow-x:auto;
+}
 table{
-  margin: 20px auto;
+  margin: 30px auto;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-tbody tr:nth-of-type(even){
-  background-color: #ccc;
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
 }
 
-td{
-  text-align: center;
+tr:hover {
+  background-color: #f5f5f5;
 }
+
+th{
+  font-size: 1.2rem;
+}
+
+td:nth-of-type(1), td:nth-of-type(3){
+  width:22.22%;
+}
+
+td:nth-of-type(2), td:nth-of-type(4),td:nth-of-type(5), td:nth-of-type(6),td:nth-of-type(7){
+  width:11.11%;
+}
+

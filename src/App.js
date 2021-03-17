@@ -75,7 +75,7 @@ function App() {
 
 //filter and sorting functions
   const filter1 = () =>{
-    const a=text.toLowerCase();
+    const a=fText.toLowerCase();
     setPosts(posts.filter(function(data) {
       return data.Provider.toLowerCase()===a;
       })
@@ -131,12 +131,14 @@ function App() {
 
   //api endpoint call
   useEffect(()=>{
-    axios.get('https://nut-case.s3.amazonaws.com/coursessc.json')
+    axios.get("https://nut-case.s3.amazonaws.com/coursessc.json")
     .then(res=>{
       setPost(res.data)
+      console.log(res.data);
     })
     .catch(err=>{
       console.log(err);
+      console.log("sas")
     })
     
   },[])
@@ -226,7 +228,7 @@ function App() {
       <div>
          {posts.length>0?<div>
                             {(filterResult===false)?
-                            <div className="filter">
+                            <div className="filter" key={post["Course Id"]}>
                                     <h1>{posts.length} courses found</h1>
                                     <div>
                                       <h4>Filter by Provider</h4>
@@ -237,8 +239,9 @@ function App() {
                                        <button type="submit" onClick={sortB} className="descsort">&#8595;</button> 
                                     </div>
                             </div>:null}
-                                  
-                            <table border="1" cellSpacing="10" cellPadding="10">
+
+                          <div className="tabdiv">    
+                            <table key={post["Course Id"]}  >
                                 <thead>
                                     <tr>
                                       <th>Course Name</th>
@@ -264,7 +267,8 @@ function App() {
                                       }
                                     </tbody>
                             </table>
-                          </div>
+                          </div>    
+                        </div>
                                 :result===true?<h1 className="nores">No Results Found</h1>:null}
                   </div>
           </div>
