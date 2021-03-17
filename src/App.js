@@ -6,8 +6,8 @@ import './App.css';
 
 function App() {
 
-  const [post, setPost] = useState([]);
-  const [posts, setPosts] = useState([]);
+  const [course, setCourse] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [drop, setDrop] = useState("all");
   const [text, setText] = useState("");
   const [fText, setFtext] = useState("");
@@ -21,38 +21,38 @@ function App() {
    
     setText("");
     if(drop==="all"){
-      setPosts(post.filter(function(posts){
-        return posts["Course Id"]>0
+      setCourses(course.filter(function(courses){
+        return courses["Course Id"]>0
       }));
       setFilterResult(false);
     }
     else if(drop==="provider"){
           const a=text.toLowerCase();
-        setPosts(post.filter(function(posts) {
-          return posts.Provider.toLowerCase()===a;
+        setCourses(course.filter(function(courses) {
+          return courses.Provider.toLowerCase()===a;
         }));
         setResult(true);
         setFilterResult(false);
      }
     else if(drop==="child sub"){
       const a=text.toLowerCase();
-      setPosts(post.filter(function(posts) {
-        return posts["Child Subject"].toLowerCase()===a;
+      setCourses(course.filter(function(courses) {
+        return courses["Child Subject"].toLowerCase()===a;
       }));
       setResult(true);
       setFilterResult(false);
    
     }
     else if(drop==="sess time"){
-      setPosts(post.filter(function(posts) {
-        if(posts["Next Session Date"].length===14){
-          const b=posts["Next Session Date"].substr(0,2)+" "+posts["Next Session Date"].substr(5,3)+" "+posts["Next Session Date"].substr(-4);
+      setCourses(course.filter(function(courses) {
+        if(courses["Next Session Date"].length===14){
+          const b=courses["Next Session Date"].substr(0,2)+" "+courses["Next Session Date"].substr(5,3)+" "+courses["Next Session Date"].substr(-4);
           const a=Date.parse(date);
           const c=Date.parse(b)+19800000;
            return c===a;
         } 
-        else if(posts["Next Session Date"].length===13){
-          const b=posts["Next Session Date"].substr(0,1)+" "+posts["Next Session Date"].substr(4,3)+" "+posts["Next Session Date"].substr(-4);
+        else if(courses["Next Session Date"].length===13){
+          const b=courses["Next Session Date"].substr(0,1)+" "+courses["Next Session Date"].substr(4,3)+" "+courses["Next Session Date"].substr(-4);
           const a=Date.parse(date);
           const c=Date.parse(b)+19800000;
            return c===a;
@@ -65,8 +65,8 @@ function App() {
   }
   else if(drop==="courses"){
     const a=text.toLowerCase();
-    setPosts(post.filter(function(posts) {
-      return posts["Course Name"].toLowerCase()===a;
+    setCourses(course.filter(function(courses) {
+      return courses["Course Name"].toLowerCase()===a;
     }));
     setResult(true);
     setFilterResult(false);
@@ -76,7 +76,7 @@ function App() {
 //filter and sorting functions
   const filter1 = () =>{
     const a=fText.toLowerCase();
-    setPosts(posts.filter(function(data) {
+    setCourses(courses.filter(function(data) {
       return data.Provider.toLowerCase()===a;
       })
     );
@@ -116,14 +116,14 @@ function App() {
  
 
   const sortA = () =>{
-    setPosts(posts.sort(acompare));
+    setCourses(courses.sort(acompare));
     setResult(true);
     setFilterResult(true);
 
   }
 
   const sortB = () =>{
-    setPosts(posts.sort(dcompare));
+    setCourses(courses.sort(dcompare));
     setResult(true);
     setFilterResult(true);
 
@@ -133,7 +133,7 @@ function App() {
   useEffect(()=>{
     axios.get("https://nut-case.s3.amazonaws.com/coursessc.json")
     .then(res=>{
-      setPost(res.data)
+      setCourse(res.data)
       console.log(res.data);
     })
     .catch(err=>{
@@ -167,7 +167,7 @@ function App() {
                         </div>
                           :
               (drop==="child sub") ?<div className="options">
-                          <select onChange={(e)=>{setDrop(e.target.value)}}>
+                          <select onChange={(e)=>setDrop(e.target.value)}>
                           <option value="all">All Courses</option>
                           <option value="provider">Provider</option>
                           <option value="child sub">Child Subject</option>
@@ -226,10 +226,10 @@ function App() {
       </div>
         
       <div>
-         {posts.length>0?<div>
+         {courses.length>0?<div>
                             {(filterResult===false)?
-                            <div className="filter" key={post["Course Id"]}>
-                                    <h1>{posts.length} courses found</h1>
+                            <div className="filter" >
+                                    <h1>{courses.length} courses found</h1>
                                     <div>
                                       <h4>Filter by Provider</h4>
                                        <input type="text" value={fText}  onChange={e => setFtext(e.target.value)} placeholder="Enter Provider Name" />
@@ -241,7 +241,7 @@ function App() {
                             </div>:null}
 
                           <div className="tabdiv">    
-                            <table key={post["Course Id"]}  >
+                            <table   >
                                 <thead>
                                     <tr>
                                       <th>Course Name</th>
@@ -255,14 +255,14 @@ function App() {
                                 </thead>
                                     <tbody>
                                       {
-                                        posts.map(post => <tr>
-                                          <td>{post["Course Name"]}</td>
-                                          <td>{post.Provider}</td>
-                                          <td>{post["Universities/Institutions"]}</td>
-                                          <td>{post["Parent Subject"]}</td>
-                                          <td>{post["Child Subject"]}</td>
-                                          <td>{post["Next Session Date"]}</td>
-                                          <td>{post.Length}</td>
+                                        courses.map(course => <tr>
+                                          <td>{course["Course Name"]}</td>
+                                          <td>{course.Provider}</td>
+                                          <td>{course["Universities/Institutions"]}</td>
+                                          <td>{course["Parent Subject"]}</td>
+                                          <td>{course["Child Subject"]}</td>
+                                          <td>{course["Next Session Date"]}</td>
+                                          <td>{course.Length}</td>
                                       </tr>)
                                       }
                                     </tbody>
