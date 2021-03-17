@@ -131,7 +131,7 @@ function App() {
 
   //api endpoint call
   useEffect(()=>{
-    axios.get('http://nut-case.s3.amazonaws.com/coursessc.json')
+    axios.get('https://nut-case.s3.amazonaws.com/coursessc.json')
     .then(res=>{
       setPost(res.data)
     })
