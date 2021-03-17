@@ -28,6 +28,6 @@ To run the application
 
 ### Upcoming Features
 
-Mobile Responsive Design
-Sort by Session Date
+Mobile Responsive Design\
+Sort by Session Date\
 Improved Filter Method
