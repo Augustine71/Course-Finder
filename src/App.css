@@ -1,9 +1,10 @@
 *{
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
-.navbar{
+.navbar1{
   width:100vw;
   height:30vh;
   background-color: black;
@@ -13,13 +14,12 @@
   flex-direction: column;
 }
 
-.tag{
+.tag1{
  color: white;
- 
  font-size: 1.2rem;
 }
 
-.searchbar{
+.searchbar1{
   
   width:50%;
   height:40%;
@@ -37,7 +37,7 @@
   align-items: center;
 }
 
-.searchbar select{
+.searchbar1 select{
   
  width:20%;
   height: 40px;
@@ -51,7 +51,7 @@
   color:lightslategray;
   
 }
-.searchbar input{
+.searchbar1 input{
   margin-left: 5px;
   width: 50%;
   height: 28px;
@@ -62,7 +62,7 @@
   padding-left: 10px;
 }
 
-.searchbar button{
+.searchbar1 button{
   width:20%;
   height: 41px;
   margin-left: 5px;
@@ -95,14 +95,15 @@
   justify-content: flex-end;
 }
 
-.filter div h4{
-  margin-right: 5px;
+.filter div h5{
+  margin-right: 10px;
+  margin-top: 7.5px;
 }
 .descsort {
   width:30px;
   height: 25px;
   padding: 1px;
-  
+  margin-top: 7px;
   color:black;
   border-radius: 2px;
   border:1px solid lightgrey;
@@ -116,6 +117,7 @@
   height: 25px;
   padding: 1px;
   margin-right: 4px;
+  margin-top:7px ;
   color:black;
   border-radius: 2px;
   border:1px solid lightgrey;
@@ -127,6 +129,7 @@
 
 .filbut{
   margin-right: 10px;
+  margin-top: 7px;
   width:30px;
   height: 25px;
   padding: 1px;
@@ -139,7 +142,7 @@
 }
 
 .filter input{
-  margin-right: 4px;
+  margin-right: 5px;
   border: 1px solid black;
   padding-left:5px;
 }
@@ -150,36 +153,41 @@
 }
 
 .tabdiv{
-  width:80vw;
+  width:85vw;
   margin: 10px auto;
   overflow-x:auto;
 }
-table{
-  margin: 30px auto;
+
+
+.card{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  height:400px;
+  overflow:hidden;
+  width: 275px;
+  border: none;
+}
+
+.card:hover{
+  box-shadow: 0 2px 3px;
+  transform: translateY(-10px);
+}
+
+.card:hover img{
+  opacity: 0.7;
+}
+
+.coursecard{
   width: 100%;
-  border-collapse: collapse;
+  height: 150px;
+
 }
 
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+.learn{
+  position: absolute;
+  bottom: 15px;
+  left:20px;
 }
 
-tr:hover {
-  background-color: #f5f5f5;
-}
 
-th{
-  font-size: 1.2rem;
-}
-
-td:nth-of-type(1), td:nth-of-type(3){
-  width:22.22%;
-}
-
-td:nth-of-type(2), td:nth-of-type(4),td:nth-of-type(5), td:nth-of-type(6),td:nth-of-type(7){
-  width:11.11%;
-}
 

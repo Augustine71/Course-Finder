@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -14,6 +15,19 @@ function App() {
   const [date, setDate] = useState();
   const [result, setResult] = useState(false);
   const [filterResult, setFilterResult] = useState(false);
+
+  //array of random images
+  const randomImage =[ 
+    "https://img-a.udemycdn.com/course/240x135/1395136_3f8a_3.jpg?fz9Vvn9dURkUbBs0b3KFTToFXIVHonYq7hF50TDVywmWeZdxEEwGSbqGZbjfTcmQG9CaaYucaw6xT4jIl0NH3VyEnzSyL7RZpW2fkXP_nktXQScCvmVQeOmUcEGTUA",
+    
+    "https://img-a.udemycdn.com/course/240x135/1343418_022e.jpg?SYaw0jLvcrjoVZZLSHf3WQfLefDNSHqLx2k6t9olAsl0iollEQ_XP110fi8BVXFjaXMrfQ713qfmMkOYNVfWuQVIOQeo-IXeGcAPDV_cxMfUSYgockQ6CflvxSk",
+
+    "https://img-a.udemycdn.com/course/240x135/706620_fc27_6.jpg?2Vio9Non6wkXVGP8lPZYNhgzAVdzACovc1BUJwyP0rS6Tu7FBklU1qhW9ljfWksnLMrLKtJ4-4VqgPhdYP-eT8ScNHXDIr774H39oiJekKmy2dDcorkef6wkNw2s",
+
+    "https://img-a.udemycdn.com/course/240x135/3721612_19ab_2.jpg?quj6usGvZmnl5a19Izk2Mj1JfLY22KJ0AyBgaidlM0CJ1En4hiR3bIxyi4GoVf3V5LjkYYCljuO9T9Wl853FJ7sSMyUvy3PSzLs73quCtvTGXur-1a8SP5wYCG1YVw",
+
+    "https://img-a.udemycdn.com/course/240x135/652422_81cd_7.jpg?mLuLmVmS8NAKiuTNs3-6IxloodxUvyXsW123cPNgJCX3p1hhAzpmqRPpA9gg_QNTPOWG46NIU-uG6c0QOlA7MdNuPP4_5N_NlZnGWupuuCyiySnanQrWysNfDGQK"
+  ]
 
   //user search functions
   const handleClick = (e) =>{
@@ -146,12 +160,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="navbar">
-        <div className="tag">
+      <div className="navbar1">
+        <div className="tag1">
           <h1>Course Finder</h1>
         </div>
       
-       <div className="searchbar">
+       <div className="searchbar1">
             {(drop==="provider")?<div className="options">
                           <select onChange={(e)=>{setDrop(e.target.value)}}>
                           <option value="all">All Courses</option>
@@ -231,42 +245,32 @@ function App() {
                             <div className="filter" >
                                     <h1>{courses.length} courses found</h1>
                                     <div>
-                                      <h4>Filter by Provider</h4>
+                                      <h5>Filter by Provider</h5>
                                        <input type="text" value={fText}  onChange={e => setFtext(e.target.value)} placeholder="Enter Provider Name" />
                                        <button type="submit" onClick={filter1} className="filbut">></button>
-                                       <h4>Sort by length</h4>
+                                       <h5>Sort by length</h5>
                                        <button type="submit" onClick={sortA} className="ascsort">&#8593;</button> 
                                        <button type="submit" onClick={sortB} className="descsort">&#8595;</button> 
                                     </div>
                             </div>:null}
 
                           <div className="tabdiv">    
-                            <table   >
-                                <thead>
-                                    <tr>
-                                      <th>Course Name</th>
-                                      <th>Provider</th>
-                                      <th>University</th>
-                                      <th>Parent Sub</th>
-                                      <th>Child Sub</th>
-                                      <th>Next Session</th>
-                                      <th>Length</th>
-                                    </tr>
-                                </thead>
-                                    <tbody>
-                                      {
-                                        courses.map(course => <tr>
-                                          <td>{course["Course Name"]}</td>
-                                          <td>{course.Provider}</td>
-                                          <td>{course["Universities/Institutions"]}</td>
-                                          <td>{course["Parent Subject"]}</td>
-                                          <td>{course["Child Subject"]}</td>
-                                          <td>{course["Next Session Date"]}</td>
-                                          <td>{course.Length}</td>
-                                      </tr>)
-                                      }
-                                    </tbody>
-                            </table>
+                           <div className="row justify-content-center">
+                             {
+                               courses.map(course => 
+                                <div className="col-md-3">
+                                  <div className="card">
+                                  <img className="card-img-top coursecard" src={randomImage[Math.floor(Math.random()*randomImage.length)]} alt="Card"/>
+                                        <div className="card-body">
+                                          <h5 className="card-title">{course["Course Name"]}</h5>
+                                          <h6 className="card-subtitle mb-2 text-muted">{course["Universities/Institutions"]}</h6>
+                                          <p className="card-text">Next Session Date: {course["Next Session Date"]}</p>
+                                          <a href={course["Url"]} className="btn btn-primary learn">Learn More</a>
+                                        </div>
+                                  </div>
+                                </div>)
+                             }
+                           </div>
                           </div>    
                         </div>
                                 :result===true?<h1 className="nores">No Results Found</h1>:null}
@@ -278,3 +282,29 @@ function App() {
 export default App;
 
 
+/* <table   >
+<thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Provider</th>
+      <th>University</th>
+      <th>Parent Sub</th>
+      <th>Child Sub</th>
+      <th>Next Session</th>
+      <th>Length</th>
+    </tr>
+</thead>
+    <tbody>
+      {
+        courses.map(course => <tr>
+          <td>{course["Course Name"]}</td>
+          <td>{course.Provider}</td>
+          <td>{course["Universities/Institutions"]}</td>
+          <td>{course["Parent Subject"]}</td>
+          <td>{course["Child Subject"]}</td>
+          <td>{course["Next Session Date"]}</td>
+          <td>{course.Length}</td>
+      </tr>)
+      }
+    </tbody>
+</table> */
